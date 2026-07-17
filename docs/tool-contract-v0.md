@@ -32,7 +32,7 @@ Side effect: local active selection only; no Work item transition.
 
 ### `record_progress(checkpoint)`
 
-Submits one structured Progress Checkpoint to Core. Core validates, redacts, deduplicates, writes durably, and creates independent deliveries for every enabled write connection before returning a Checkpoint receipt.
+Submits one structured Progress Checkpoint to Core. The caller must omit credentials, raw transcripts, full diffs, and other secret-bearing content. Core validates the bounded structure, deduplicates, writes durably, and creates independent deliveries for every enabled write connection before returning a Checkpoint receipt; it cannot infer destination-specific secrets from arbitrary text.
 
 Required grant: `write_progress`.
 

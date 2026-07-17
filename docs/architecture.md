@@ -41,4 +41,4 @@ Bundling changes distribution convenience, not authority. Core still owns generi
 
 ## Implementation gate
 
-Core now provides Capability Gate and SQLite-backed Progress Recorder foundations. Gareji MCP still has no server implementation. Choose its implementation language only after a conformance fake proves the v0 tool contract and Core integration shape. Prefer a single cross-platform binary if it can share generated contracts without coupling this repository to Core internals.
+Core provides Capability Gate and SQLite-backed Progress Recorder foundations. Gareji MCP now has a single-binary Rust STDIO server and an in-memory Fixture Adapter proving the five-tool transport Interface. The Fixture Adapter is disposable and owns no production state. The next gate is a Core/Board Adapter plus an MCP client conformance roundtrip using the same `GarejiBackend` Interface.

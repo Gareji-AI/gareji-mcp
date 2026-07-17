@@ -22,4 +22,10 @@ See [the architecture](docs/architecture.md), [the v0 tool contract](docs/tool-c
 
 ## Status
 
-Private local design scaffold. No implementation language, remote repository, release, or public license has been finalized. The standalone MCP Interface will be proven before it is bundled with a Codex Plugin, Stop Hook, or sample Skills.
+The first Rust STDIO server exposes the five v0 tools through an in-memory Fixture Adapter. Run it with `cargo run`; it owns no production state and does not execute code. The next Adapter connects the same Interface to Gareji Core and Board.
+
+```bash
+cargo fmt --all --check
+cargo clippy --all-targets -- -D warnings
+cargo test --all-targets
+```

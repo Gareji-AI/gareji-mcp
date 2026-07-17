@@ -2,7 +2,7 @@
 
 ## Scope
 
-Gareji MCP is a thin transport. It owns MCP protocol translation, tool descriptions, client-facing validation errors, and connection lifecycle. Gareji Core owns generic permissions, durable Progress Checkpoint intake, idempotency, redaction, local storage, and delivery. Gareji Board owns Work item state and applies recommended transitions.
+Gareji MCP is a thin transport. It owns MCP protocol translation, tool descriptions, client-facing validation errors, and connection lifecycle. Gareji Core owns generic permissions, durable Progress Checkpoint intake, idempotency, bounded validation, local storage, and delivery. Gareji Board owns Work item state and applies recommended transitions. Callers and destination Adapters must keep secret-bearing text out of Checkpoints and persisted delivery messages because Core cannot infer provider-specific secrets.
 
 Do not create an MCP-only database, duplicate Core policy, infer task assignment silently, or expose arbitrary shell, file mutation, Git, publication, secret, or direct completion tools.
 
@@ -20,3 +20,11 @@ Do not create an MCP-only database, duplicate Core policy, infer task assignment
 - Keep contract examples and conformance tests with the tool behavior they prove.
 - Use an English Conventional Commit subject.
 - Never include credentials, personal paths, customer data, private strategy, or raw transcripts.
+
+## Checks
+
+```bash
+cargo fmt --all --check
+cargo clippy --all-targets -- -D warnings
+cargo test --all-targets
+```
