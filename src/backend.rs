@@ -203,6 +203,10 @@ pub enum BackendError {
     CheckpointNotFound,
     #[error("Work item was not found")]
     WorkItemNotFound,
+    #[error("Work item state is not eligible for active work")]
+    WorkItemNotEligible,
+    #[error("Gareji Board is unavailable")]
+    BoardUnavailable,
     #[error("execution workspace is not connected")]
     WorkspaceNotConnected,
     #[error("Gareji Core is unavailable")]
@@ -220,6 +224,8 @@ impl BackendError {
             Self::PermissionDenied => "permission_denied",
             Self::ProjectNotFound => "project_not_found",
             Self::WorkItemNotFound => "work_item_not_found",
+            Self::WorkItemNotEligible => "work_item_not_eligible",
+            Self::BoardUnavailable => "board_unavailable",
             Self::WorkspaceNotConnected => "workspace_not_connected",
             Self::CheckpointNotFound => "checkpoint_not_found",
             Self::CoreUnavailable => "core_unavailable",
