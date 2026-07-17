@@ -24,7 +24,7 @@ Side effect: none.
 
 ### `set_active_work_item(project_id, work_item_id)`
 
-Stores the explicit active Work item for the project's connected Execution workspace and returns the previous and current selection. It rejects terminal, unrelated, or inaccessible Work items.
+Stores the explicit active Work item for the project's connected Execution workspace and returns the previous and current selection. Core validates the project, grant, and bounded identity. Work item existence, relationship, and terminal state become enforced when a Board Adapter is connected; v0 does not claim those checks before that Adapter exists.
 
 Required grant: `select_active_work`.
 

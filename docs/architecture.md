@@ -9,8 +9,8 @@ Gareji MCP is a transport Adapter at the client-to-Gareji seam. Its small tool s
 ```text
 Codex MCP client
   -> Gareji MCP tool translation
-  -> project permission check through Core
-  -> Core or Board Interface
+  -> reusable local Core child-process Adapter
+  -> Core Registry, permission, and Progress Recorder Interfaces
   -> durable receipt or sourced result
 ```
 
@@ -18,7 +18,7 @@ MCP does not write directly to SQLite, Markdown, JSON knowledge stores, or Board
 
 ## Initial transport
 
-v0 uses a local STDIO MCP server started by a command. This fits the local-first product, requires no always-on network listener, and is supported by Codex clients. Streamable HTTP is deferred until Gareji Cloud or another real remote client exists.
+v0 uses a local STDIO MCP server started by a command. It lazily starts one `gareji-core bridge` child process and reuses it for all tool calls. This fits the local-first product, amortizes Core startup, requires no always-on network listener, and is supported by Codex clients. Streamable HTTP is deferred until Gareji Cloud or another real remote client exists.
 
 The server initialization `instructions` field will summarize cross-tool ordering, permission limits, and rate guidance. Its first 512 characters must be self-contained so a client can make safe tool choices from the truncated guidance.
 
@@ -39,6 +39,8 @@ After the standalone MCP server and Hook work independently, a Codex Plugin may 
 
 Bundling changes distribution convenience, not authority. Core still owns generic rules and Board still owns Work item state.
 
-## Implementation gate
+## Implementation status
 
-Core provides Capability Gate and SQLite-backed Progress Recorder foundations. Gareji MCP now has a single-binary Rust STDIO server and an in-memory Fixture Adapter proving the five-tool transport Interface. The Fixture Adapter is disposable and owns no production state. The next gate is a Core/Board Adapter plus an MCP client conformance roundtrip using the same `GarejiBackend` Interface.
+The single-binary Rust MCP server uses the production `CoreBackend` Adapter by default. Core owns project registration, grants, active-work references, Checkpoint validation, SQLite durability, and delivery state. The Fixture Adapter is disposable test support and owns no production state.
+
+The next integration gate is a Board Adapter that validates Work item existence and eligibility while preserving Board ownership of state transitions.
