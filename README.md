@@ -24,7 +24,7 @@ See [the architecture](docs/architecture.md), [the v0 tool contract](docs/tool-c
 
 The Rust STDIO server exposes the five v0 tools through a production `CoreBackend` Adapter. It lazily starts one `gareji-core bridge` child process, reuses it across calls, and leaves Registry, grant, validation, and Progress Recorder behavior inside Core. The in-memory Fixture Adapter remains only for conformance tests.
 
-Install both `gareji-core` and `gareji-mcp`, then run `gareji-mcp`. Set `GAREJI_CORE_BIN` only when the Core executable is not on `PATH`, and set `GAREJI_CORE_DB` only when an explicit local database is required. A missing Core installation is reported as `core_unavailable` when a tool is called.
+Install `gareji-board`, `gareji-core`, and `gareji-mcp`, then run `gareji-mcp`. Set `GAREJI_CORE_BIN` or `GAREJI_BOARD_BIN` only when an executable is not on `PATH`; database overrides are available through `GAREJI_CORE_DB` and `GAREJI_BOARD_DB`. A missing Core is reported as `core_unavailable`, while active-work selection reports a missing Board as `board_unavailable` without disabling unrelated tools.
 
 ```bash
 cargo fmt --all --check

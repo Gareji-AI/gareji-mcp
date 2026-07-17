@@ -9,3 +9,5 @@ The production `CoreBackend` Adapter starts `gareji-core bridge` lazily and reus
 The in-memory Fixture Adapter remains only for transport conformance tests. A small internal transport Seam allows those tests to replace the child process without exposing process details through the public `GarejiBackend` Interface.
 
 This is not a background daemon. Closing MCP closes the child pipes and ends the local Core process. A future daemon or Cloud Adapter can replace this transport at the same Seam when a real multi-client requirement exists.
+
+Core may in turn keep one `gareji-board bridge` child for Board-owned active-work assessment. This preserves the same local process composition: MCP owns transport, Core owns operational state, and Board owns Work item state.

@@ -11,6 +11,7 @@ Codex MCP client
   -> Gareji MCP tool translation
   -> reusable local Core child-process Adapter
   -> Core Registry, permission, and Progress Recorder Interfaces
+  -> reusable Board child-process Adapter for active-work assessment
   -> durable receipt or sourced result
 ```
 
@@ -41,6 +42,6 @@ Bundling changes distribution convenience, not authority. Core still owns generi
 
 ## Implementation status
 
-The single-binary Rust MCP server uses the production `CoreBackend` Adapter by default. Core owns project registration, grants, active-work references, Checkpoint validation, SQLite durability, and delivery state. The Fixture Adapter is disposable test support and owns no production state.
+The single-binary Rust MCP server uses the production `CoreBackend` Adapter by default. Core owns project registration, grants, active-work references, Checkpoint validation, SQLite durability, and delivery state. Board now validates Work item existence, project relationship, and active-work eligibility before Core changes the selection. The Fixture Adapter is disposable test support and owns no production state.
 
-The next integration gate is a Board Adapter that validates Work item existence and eligibility while preserving Board ownership of state transitions.
+The next integration gate is Board reconciliation of accepted Progress Checkpoints into visible Work item timelines and state recommendations.

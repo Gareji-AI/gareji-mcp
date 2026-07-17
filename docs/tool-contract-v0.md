@@ -1,6 +1,6 @@
 # Gareji MCP tool contract v0
 
-Status: proposed for the first implementation.
+Status: implemented for the first local integration.
 
 ## Server instructions
 
@@ -24,7 +24,7 @@ Side effect: none.
 
 ### `set_active_work_item(project_id, work_item_id)`
 
-Stores the explicit active Work item for the project's connected Execution workspace and returns the previous and current selection. Core validates the project, grant, and bounded identity. Work item existence, relationship, and terminal state become enforced when a Board Adapter is connected; v0 does not claim those checks before that Adapter exists.
+Stores the explicit active Work item for the project's connected Execution workspace and returns the previous and current selection. Core validates the project, grant, and bounded identity, then requires Board to confirm Work item existence, project relationship, and active-work eligibility. Board rejects unadmitted, blocked, and terminal states without changing the previous Core selection.
 
 Required grant: `select_active_work`.
 
@@ -52,6 +52,8 @@ Side effect: none.
 - `permission_denied`
 - `project_not_found`
 - `work_item_not_found`
+- `work_item_not_eligible`
+- `board_unavailable`
 - `workspace_not_connected`
 - `checkpoint_not_found`
 - `core_unavailable`
