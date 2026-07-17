@@ -25,7 +25,7 @@ pub struct CheckpointStatusRequest {
     pub checkpoint_id: String,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct ProjectView {
     pub id: String,
     pub name: String,
@@ -34,27 +34,28 @@ pub struct ProjectView {
     pub grants: Vec<String>,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct ListProjectsOutput {
     pub projects: Vec<ProjectView>,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct SourcedContext {
     pub workspace_id: String,
     pub source_id: String,
     pub freshness: String,
-    pub content: String,
+    pub content: Option<String>,
+    pub evidence_ref: Option<String>,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct ProjectContextOutput {
     pub project_id: String,
     pub work_item_id: Option<String>,
     pub sources: Vec<SourcedContext>,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 #[allow(clippy::struct_field_names)]
 pub struct ActiveWorkItemOutput {
     pub project_id: String,
@@ -62,21 +63,21 @@ pub struct ActiveWorkItemOutput {
     pub current_work_item_id: String,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct DeliveryView {
     pub destination_id: String,
     pub status: String,
     pub attempts: u32,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct RecordProgressOutput {
     pub checkpoint_id: String,
     pub duplicate: bool,
     pub deliveries: Vec<DeliveryView>,
 }
 
-#[derive(Clone, Debug, PartialEq, Serialize, schemars::JsonSchema)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, schemars::JsonSchema)]
 pub struct CheckpointStatusOutput {
     pub checkpoint_id: String,
     pub checkpoint: Value,

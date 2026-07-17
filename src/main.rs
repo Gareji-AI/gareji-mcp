@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use anyhow::Result;
-use gareji_mcp::{FixtureBackend, GarejiMcpServer};
+use gareji_mcp::{CoreBackend, GarejiMcpServer};
 use rmcp::{ServiceExt, transport::stdio};
 use tracing_subscriber::EnvFilter;
 
@@ -13,7 +13,7 @@ async fn main() -> Result<()> {
         .with_ansi(false)
         .init();
 
-    let server = GarejiMcpServer::new(Arc::new(FixtureBackend::default()));
+    let server = GarejiMcpServer::new(Arc::new(CoreBackend::from_environment()));
     let service = server.serve(stdio()).await?;
     service.waiting().await?;
     Ok(())

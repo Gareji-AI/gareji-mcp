@@ -116,7 +116,10 @@ impl GarejiBackend for FixtureBackend {
                 workspace_id: "demo-knowledge".to_owned(),
                 source_id: "project-brief".to_owned(),
                 freshness: "fixture".to_owned(),
-                content: "Build an understandable local multi-project control surface.".to_owned(),
+                content: Some(
+                    "Build an understandable local multi-project control surface.".to_owned(),
+                ),
+                evidence_ref: None,
             }],
         })
     }
@@ -192,10 +195,18 @@ impl GarejiBackend for FixtureBackend {
 pub enum BackendError {
     #[error("request did not satisfy the Gareji contract")]
     InvalidRequest,
+    #[error("project does not grant this operation")]
+    PermissionDenied,
     #[error("project was not found or is not visible")]
     ProjectNotFound,
     #[error("checkpoint was not found")]
     CheckpointNotFound,
+    #[error("Work item was not found")]
+    WorkItemNotFound,
+    #[error("execution workspace is not connected")]
+    WorkspaceNotConnected,
+    #[error("Gareji Core is unavailable")]
+    CoreUnavailable,
     #[error("checkpoint identity conflicts with stored content")]
     Conflict,
     #[error("local Gareji operation failed")]
@@ -206,8 +217,12 @@ impl BackendError {
     pub const fn code(self) -> &'static str {
         match self {
             Self::InvalidRequest => "invalid_request",
+            Self::PermissionDenied => "permission_denied",
             Self::ProjectNotFound => "project_not_found",
+            Self::WorkItemNotFound => "work_item_not_found",
+            Self::WorkspaceNotConnected => "workspace_not_connected",
             Self::CheckpointNotFound => "checkpoint_not_found",
+            Self::CoreUnavailable => "core_unavailable",
             Self::Conflict => "conflict",
             Self::Internal => "internal_error",
         }

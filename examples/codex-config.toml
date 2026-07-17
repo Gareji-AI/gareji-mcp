@@ -3,4 +3,3 @@
 
 [mcp_servers.gareji]
 command = "gareji-mcp"
-args = ["serve", "--stdio"]
