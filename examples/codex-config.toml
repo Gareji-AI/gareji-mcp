@@ -1,0 +1,6 @@
+# Documentation example only. Copy deliberately after installing `gareji-mcp`.
+# Project-scoped Codex configuration loads only after the project is trusted.
+
+[mcp_servers.gareji]
+command = "gareji-mcp"
+args = ["serve", "--stdio"]
