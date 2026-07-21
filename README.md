@@ -2,6 +2,12 @@
 
 Gareji MCP is the thin, user-enabled Codex transport for Gareji projects, sourced context, active Work item selection, Progress Checkpoint recording, and delivery inspection. It delegates validation, permissions, storage, redaction, idempotency, and projection behavior to Gareji Core and Gareji Board instead of becoming another state owner.
 
+## OpenAI Build Week
+
+Gareji MCP is one of three public repositories in the Gareji submission, together with [Gareji Board](https://github.com/Gareji-AI/gareji-board) and [Gareji Core](https://github.com/Gareji-AI/gareji-core). Codex was used to implement the STDIO transport, client-facing validation, tool descriptions, and conformance tests. GPT-5.6 was used to reason about the cross-repository contracts and verify that MCP remains a thin transport instead of duplicating Core policy or Board Work item authority.
+
+The integration uses Codex directly and does not require an OpenAI API integration or API credits. Judges can run the Board demo first, then enable this server explicitly when they want to inspect the five MCP tools against local Core and Board state.
+
 ## v0 tools
 
 ```text
@@ -31,3 +37,7 @@ cargo fmt --all --check
 cargo clippy --all-targets -- -D warnings
 cargo test --all-targets
 ```
+
+## License
+
+Licensed under [Apache License 2.0](LICENSE).
