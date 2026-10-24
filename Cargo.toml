@@ -8,7 +8,7 @@ repository = "https://github.com/Gareji-AI/gareji-mcp"
 
 [dependencies]
 anyhow = "1.0.103"
-rmcp = { version = "2.2.0", features = ["transport-io"] }
+rmcp = { version = "3.6.0", features = ["transport-io"] }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.150"
 thiserror = "2.0.18"
@@ -17,7 +17,7 @@ tracing = "0.1.44"
 tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
 
 [dev-dependencies]
-rmcp = { version = "2.2.0", features = ["client", "transport-io"] }
+rmcp = { version = "3.6.0", features = ["client", "transport-io"] }
 
 [lints.rust]
 unsafe_code = "forbid"
